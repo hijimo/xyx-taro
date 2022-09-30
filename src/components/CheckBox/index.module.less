@@ -1,0 +1,29 @@
+@import "@/variable.less";
+.checkbox {
+  color: @color-text-base;
+  font-size: @font-size-subhead;
+
+  :global {
+    .wx-checkbox-input {
+      width: 36px;
+      height: 36px;
+      border-radius: @radius-circle;
+      margin-right: 0;
+
+      color: @color-text-base-inverse;
+      position: relative;
+    }
+    .wx-checkbox-input.wx-checkbox-input-checked {
+      border-color: @color-brand;
+      background-color: @color-brand;
+    }
+    .wx-checkbox-input.wx-checkbox-input-checked::before {
+      line-height: 1;
+      text-align: center;
+      color: @color-text-base-inverse;
+      font-size: @font-size-caption;
+      border-color: transparent;
+      border-radius: @radius-circle;
+    }
+  }
+}

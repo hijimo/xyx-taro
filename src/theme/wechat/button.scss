@@ -1,0 +1,74 @@
+@import "@/variable.less";
+
+button {
+  display: inline-block;
+  border-color: $color-brand-black;
+  border-width: 0;
+  background-color: $color-brand-black;
+  color: $color-text-base;
+  border-radius: 40px;
+  font-size: $font-size-base;
+  height: 80px;
+  line-height: 80px;
+  margin: 0;
+  // 加个200px, 基本上大部分的按钮都是200px。。。
+  width: 200px;
+
+  &::after {
+    border: none;
+  }
+}
+
+.button-hover {
+  border-color: $color-brand-black;
+  border-width: 0;
+  background-color: $color-brand-black;
+  color: $color-text-base-inverse;
+}
+
+button[type="warn"] {
+  // 临时颜色，未确定
+  color: $color-text-base-inverse;
+  border-width: 0;
+  border-color: $color-brand-light;
+  background-color: $color-brand-light;
+}
+
+button[type="primary"] {
+  color: $color-text-base-inverse;
+  border-color: $color-brand;
+  background-color: $color-brand;
+}
+
+.button-hover[type="primary"] {
+  color: $color-text-base-inverse;
+  border-color: $color-brand;
+  background-color: $color-brand;
+}
+
+button[plain] {
+  border-color: $border-color-gray;
+}
+
+button[type="warn"][plain] {
+  color: $color-brand-light;
+  border-color: $color-brand-light;
+}
+
+button[type="primary"][plain] {
+  color: $color-brand;
+  border-color: $color-brand;
+}
+
+button[size="mini"] {
+  width: auto;
+  height: 64px;
+  line-height: 64px;
+  min-width: 140px;
+  border-radius: $radius-sm;
+}
+
+button.block {
+  display: block;
+  width: 100%;
+}

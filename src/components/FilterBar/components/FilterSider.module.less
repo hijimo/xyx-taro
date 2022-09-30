@@ -1,0 +1,22 @@
+@import "~@/variable.less";
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.form {
+  flex: auto;
+  width: 100%;
+  display: grid;
+  grid-row-gap: @margin-md;
+  align-content: start;
+  overflow-y: auto;
+}
+.footer {
+  flex: none;
+  display: flex;
+  .button {
+    flex: 50%;
+    border-radius: 0;
+  }
+}

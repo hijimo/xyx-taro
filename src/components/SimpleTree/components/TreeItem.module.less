@@ -1,0 +1,29 @@
+@import "~@/variable.less";
+.treeItem {
+  padding-left: @padding-xxl;
+  .treeNode {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    position: relative;
+    .icon {
+      position: absolute;
+      left: -50px;
+
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .title {
+      flex: auto;
+      // font-weight: 600;
+      font-size: @font-size-base;
+      color: @color-text-base;
+    }
+    :global {
+      .uc-radio {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

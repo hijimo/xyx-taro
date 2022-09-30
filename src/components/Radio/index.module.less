@@ -1,0 +1,47 @@
+@import "@/variable.less";
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  &.reverse {
+    flex-direction: row-reverse;
+    .icon {
+      margin-right: 0;
+      margin-left: @margin-xs;
+    }
+  }
+  &.active {
+    .icon {
+      border-color: @color-brand;
+      &::before {
+        transition: transform 0.15s ease;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+  .label {
+  }
+  .icon {
+    margin-right: @margin-xs;
+    width: 34px;
+    height: 34px;
+    border-radius: @radius-circle;
+    border: solid 2px rgba(110, 110, 110, 0.8);
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: @radius-circle;
+      transform: translate(-50%, -50%) scale(0);
+      top: 50%;
+      left: 50%;
+      background-color: @color-brand;
+      transition: transform 0.25s ease-out;
+    }
+  }
+}
+
+.group {
+}

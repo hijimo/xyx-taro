@@ -1,0 +1,18 @@
+@import "@/variable.less";
+
+.phoneInput {
+  display: flex;
+  align-items: center;
+
+  .input {
+    flex: 1;
+  }
+  .button {
+    color: @color-brand-dark;
+    padding: 0;
+    width: auto;
+    &.disabled {
+      color: @color-text-third;
+    }
+  }
+}

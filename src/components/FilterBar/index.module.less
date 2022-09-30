@@ -1,0 +1,24 @@
+@import "@/variable.less";
+
+.filterBar {
+  background-color: @fill-base;
+  .display {
+    display: flex;
+
+    .label {
+      height: 72px;
+      line-height: 72px;
+      text-align: center;
+      flex: 1;
+      flex-shrink: 0;
+      .text {
+        color: @color-text-base;
+        font-size: @font-size-subhead;
+      }
+      .icon {
+        margin-left: @margin-xs;
+        color: @color-text-secondary;
+      }
+    }
+  }
+}

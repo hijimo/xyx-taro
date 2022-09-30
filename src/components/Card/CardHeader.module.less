@@ -1,0 +1,26 @@
+@import "@/variable.less";
+
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  padding: @v-spacing-lg @h-spacing-xxxxl;
+  // prettier-ignore
+  border-bottom: 1PX solid @border-color-base;
+
+  .thumb {
+    flex: 0 0 auto;
+  }
+
+  .title {
+    flex: 1;
+    font-weight: bold;
+    min-width: 0;
+  }
+
+  .extra {
+    flex: 0 0 auto;
+    color: @color-text-base;
+    font-weight: normal;
+    font-size: @font-size-small;
+  }
+}

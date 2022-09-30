@@ -1,0 +1,25 @@
+@import "~@/variable.less";
+.h {
+  padding-top: @padding-lg;
+  padding-bottom: @padding-sm;
+  font-weight: 600;
+  color: @color-text-base;
+  line-height: @line-height-paragraph;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &.h1 {
+    // 未使用，随时可调整
+    font-size: @font-size-heading;
+  }
+  &.h2 {
+    // 未使用，随时可调整
+    font-size: @font-size-caption;
+  }
+  &.h3 {
+    font-size: @font-size-base;
+  }
+  .extra {
+    flex: none;
+  }
+}

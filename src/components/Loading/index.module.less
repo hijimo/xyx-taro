@@ -1,0 +1,36 @@
+@import "~@/variable.less";
+
+.loading {
+  width: 100%;
+  font-size: @font-size-small;
+  color: @color-text-secondary;
+  display: flex;
+  justify-content: center;
+  padding: @padding-sm;
+  .animate {
+    width: 3em;
+
+    .span {
+      line-height: @font-size-small;
+      animation: loading 2s infinite;
+      animation-fill-mode: both;
+      overflow: hidden;
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      width: 0;
+    }
+    33% {
+      width: 10%;
+    }
+
+    66% {
+      width: 20%;
+    }
+    100% {
+      width: 30%;
+    }
+  }
+}

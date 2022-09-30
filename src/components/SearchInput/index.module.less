@@ -1,0 +1,27 @@
+@import "@/variable.less";
+
+.searchInput {
+  padding: 26px 20px;
+  background-color: @fill-base;
+
+  .content {
+    background: @fill-body;
+    color: @color-text-base;
+    position: relative;
+    //prettier-ignore
+    border-radius: 40px;
+    overflow: hidden;
+    .icon {
+      position: absolute;
+      font-size: 32px;
+      color: @color-text-secondary;
+      left: @padding-lg;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .input {
+      height: 72px;
+      padding-left: 80px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "@/variable.less";
+
+.card {
+  overflow: hidden;
+  background: @fill-base;
+  border-radius: @radius-lg;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.03);
+
+  &.full {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .header {
+    // border-bottom: 1PX solid @border-color-base;
+  }
+
+  .body {
+    overflow: hidden;
+  }
+
+  .footer {
+    // border-top: 1PX solid @border-color-base;
+  }
+}

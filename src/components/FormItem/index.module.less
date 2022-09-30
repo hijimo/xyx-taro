@@ -1,0 +1,34 @@
+@import "@/variable.less";
+
+.formItem {
+  height: 80px;
+  background: @color-background;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 @padding-md;
+  box-sizing: border-box;
+  position: relative;
+  .icon {
+    font-size: 40px;
+    margin-right: @margin-md;
+    flex: none;
+  }
+  .label {
+    margin-right: @margin-md;
+    font-size: @font-size-base;
+    color: @color-text-base;
+    flex: none;
+  }
+  .formItemContent {
+    flex: auto;
+    text-align: left;
+  }
+  .extra {
+    right: @margin-md;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9;
+  }
+}

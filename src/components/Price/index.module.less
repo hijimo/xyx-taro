@@ -1,0 +1,74 @@
+@import "@/variable.less";
+@import "@/utils/utils.less";
+.price {
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1;
+  .currency,
+  .decimal {
+    font-size: @font-size-caption;
+  }
+  .currency {
+    font-weight: normal;
+  }
+  &.invalid {
+    color: @color-text-third;
+    @include lineThrough();
+  }
+  &.xxxs {
+    font-size: 26px;
+    .currency,
+    .decimal {
+      font-size: @font-size-mini;
+    }
+  }
+  &.xxs {
+    font-size: 30px;
+    .currency,
+    .decimal {
+      font-size: @font-size-mini;
+    }
+  }
+  &.xs {
+    font-size: 36px;
+    .currency,
+    .decimal {
+      font-size: @font-size-small;
+    }
+  }
+  &.sm {
+    font-size: 42px;
+    .currency,
+    .decimal {
+      font-size: @font-size-small;
+    }
+  }
+  &.md {
+    font-size: 48px;
+    .currency,
+    .decimal {
+      font-size: @font-size-base;
+    }
+  }
+  &.lg {
+    font-size: 54px;
+    .currency,
+    .decimal {
+      font-size: @font-size-caption;
+    }
+  }
+  &.xl {
+    font-size: 60px;
+    .currency,
+    .decimal {
+      font-size: @font-size-heading;
+    }
+  }
+  &.xxl {
+    font-size: 66px;
+    .currency,
+    .decimal {
+      font-size: 38px;
+    }
+  }
+}

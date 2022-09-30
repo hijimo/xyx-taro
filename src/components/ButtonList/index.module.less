@@ -1,0 +1,57 @@
+@import "~@/variable.less";
+
+.buttonList {
+  font-size: 0;
+  text-align: left;
+
+  .button + .button {
+    margin-top: @v-spacing-lg;
+  }
+
+  &.gutterSmall {
+    .button + .button {
+      margin-top: @v-spacing-sm;
+    }
+  }
+
+  &.gutterMedium {
+    .button + .button {
+      margin-top: @v-spacing-lg;
+    }
+  }
+
+  &.gutterLarge {
+    .button + .button {
+      margin-top: @v-spacing-xxl;
+    }
+  }
+
+  &.right {
+    text-align: right;
+  }
+
+  &.inline {
+    .button + .button {
+      margin-top: 0;
+      margin-left: @h-spacing-lg;
+    }
+
+    &.gutterSmall {
+      .button + .button {
+        margin-left: @h-spacing-sm;
+      }
+    }
+
+    &.gutterMedium {
+      .button + .button {
+        margin-left: @h-spacing-lg;
+      }
+    }
+
+    &.gutterLarge {
+      .button + .button {
+        margin-left: @h-spacing-xxl;
+      }
+    }
+  }
+}

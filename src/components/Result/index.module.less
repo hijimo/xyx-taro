@@ -1,0 +1,36 @@
+@import "@/variable.less";
+.result {
+  background-color: @fill-base;
+  padding: 84px 100px 100px 100px;
+  line-height: @line-height-paragraph;
+  color: @color-text-base;
+  text-align: center;
+  .icon {
+    &.fail {
+    }
+    &.success {
+    }
+    &.waitting {
+      color: #edb73f;
+    }
+  }
+  .title {
+    margin-top: 20px;
+    font-size: @font-size-heading;
+    font-weight: bold;
+  }
+  .desc {
+    margin-top: 20px;
+    font-size: @font-size-base;
+  }
+  .activeBar {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    .button {
+      &:nth-child(n + 2) {
+        margin-left: 16px;
+      }
+    }
+  }
+}

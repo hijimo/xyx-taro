@@ -1,0 +1,35 @@
+@import "@/variable.less";
+
+.filterBarFormItem {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 @padding-lg;
+  background-color: @fill-base;
+  &.vertical {
+    flex-direction: column;
+    padding: @padding-lg;
+    align-items: flex-start;
+    height: auto;
+    .label {
+      margin-bottom: @margin-lg;
+      width: 100%;
+    }
+    .formItemContent {
+      width: 100%;
+    }
+  }
+  .label {
+    width: 150px;
+    flex: none;
+    font-size: @font-size-base;
+    &.bold {
+      font-weight: 600;
+    }
+  }
+  .formItemContent {
+    flex: auto;
+    text-align: right;
+    font-size: @font-size-base;
+  }
+}
