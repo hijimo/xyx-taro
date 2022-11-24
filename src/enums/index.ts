@@ -4,3 +4,4 @@ export * from "./user";
 export * from "./storage";
 export * from "./device";
 export * from "./file";
+export * from "./strategy";

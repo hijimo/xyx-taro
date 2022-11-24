@@ -28,6 +28,7 @@ function InteralInfiniteQueriesList<T>(
     emptyView,
     getExtraParams,
     api,
+
     renderItem,
     ...props
   }: InfiniteQueriesListProps<T>,
@@ -38,7 +39,11 @@ function InteralInfiniteQueriesList<T>(
   const queryFn: QueryFunction<any, string> = (params) => {
     const extraParams = getExtraParams?.();
     console.log("params", params);
-    return api({ pageNo: params.pageParam || 1, ...extraParams });
+    return api({
+      pageNo: params.pageParam || 1,
+      pageNum: params.pageParam || 1,
+      ...extraParams,
+    });
   };
   const {
     data,
@@ -94,7 +99,12 @@ function InteralInfiniteQueriesList<T>(
 
   return (
     <View className={styles.infiniteQueriesList}>
-      <QuickList column={1} dataSource={listData} renderItem={renderItem} />
+      <QuickList
+        {...props}
+        column={1}
+        dataSource={listData}
+        renderItem={renderItem}
+      />
       {!isFetching &&
         !isFetchingNextPage &&
         (!listData || listData.length === 0) &&

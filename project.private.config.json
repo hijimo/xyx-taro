@@ -1,0 +1,36 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/adventure/detail/index",
+          "pathName": "pages/adventure/detail/index",
+          "query": "strategyId=6",
+          "scene": null
+        },
+        {
+          "name": "pages/adventure/go/index",
+          "pathName": "pages/adventure/go/index",
+          "query": "strategyId=6",
+          "scene": null
+        },
+        {
+          "name": "pages/chapter/index",
+          "pathName": "pages/chapter/index",
+          "query": "gameId=3",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

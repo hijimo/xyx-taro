@@ -15,7 +15,11 @@ const config = {
   alias: {
     "@": path.resolve(__dirname, "..", "src"),
   },
-  plugins: [],
+  plugins: ["@tarojs/plugin-html"],
+  // 给 sass-loader 传递选项 ！！！！ 按需加载方式必须配置
+  sass: {
+    data: `@import "@nutui/nutui-react-taro/dist/styles/variables.scss";`,
+  },
   defineConstants: {},
   copy: {
     patterns: [],
@@ -27,7 +31,7 @@ const config = {
     postcss: {
       pxtransform: {
         enable: true,
-        config: {},
+        config: { selectorBlackList: ["nut-"] },
       },
       url: {
         enable: true,

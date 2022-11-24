@@ -1,10 +1,18 @@
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { View, Button, Text } from '@tarojs/components'
+import React, { useRef, useCallback } from "react";
+import { View, Button, Text } from "@tarojs/components";
+import { navigateTo } from "@tarojs/taro";
+import { NoticeBar } from "@nutui/nutui-react-taro";
+import { useQuery } from "react-query";
+import WingBlank from "@/components/WingBlank";
+import InfiniteQueriesList from "@/components/InfiniteQueriesList";
+import type { RefInfiniteQueriesListProps } from "@/components/InfiniteQueriesList";
+import Empty from "@/components/Empty";
+import AdventureItem from "@/components/ListItem/AdventureItem";
+import { getStrategyList } from "@/services/strategy";
+import { getBannerList } from "@/services/banner";
+import Banner from "./components/Banner";
 
-import { add, minus, asyncAdd } from '../../actions/counter'
-
-import './index.less'
+import styles from "./index.module.less";
 
 // #region 书写注意
 //
@@ -16,64 +24,61 @@ import './index.less'
 //
 // #endregion
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
-}
+interface IndexProps {}
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
+const Index: React.FC<IndexProps> = () => {
+  const infiniteListRef = useRef<RefInfiniteQueriesListProps>(null);
 
-type PageOwnProps = {}
+  const { data } = useQuery(
+    ["getBannerList"],
+    () => getBannerList({ pageNo: 1, pageSize: 20 }),
+    {
+      select: (d) => d.data.records,
+    }
+  );
 
-type PageState = {}
+  const handleRouteAdventure = useCallback((deviceItem: DeviceItemSSD) => {
+    navigateTo({
+      url: `/pages/device/detail/index?id=${deviceItem.id}`,
+    });
+  }, []);
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+  return (
+    <View className={styles.index}>
+      <NoticeBar
+        text="通知：受台风天气影响，请各位游客注意安全"
+        leftIcon="https://img13.360buyimg.com/imagetools/jfs/t1/72082/2/3006/1197/5d130c8dE1c71bcd6/e48a3b60804c9775.png"
+        closeMode
+        className={styles.notice}
+      />
+      <WingBlank size="xxxxl">
+        <Banner data={data} />
+        <View className={styles.title}>探秘路线</View>
 
-interface Index {
-  props: IProps;
-}
+        <InfiniteQueriesList
+          ref={infiniteListRef}
+          gutter={40}
+          getExtraParams={() => ({ pageSize: 20 })}
+          emptyView={() => <Empty remark="没有冒险" buttonVisible={false} />}
+          api={getStrategyList}
+          queryKey="getDeviceList"
+          renderItem={(it) => (
+            <AdventureItem
+              onClick={() => {
+                handleRouteAdventure(it);
+              }}
+              data={it}
+            />
+          )}
+        />
+      </WingBlank>
+      {/* <View className={styles.header}>
+        <Image src={companyIcon} className={styles.img} />
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
-class Index extends Component {
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
-      </View>
-    )
-  }
-}
-
-export default Index
-
+        {userInfo?.nickName || "--"}
+      </View> */}
+    </View>
+  );
+};
+// s
+export default Index;

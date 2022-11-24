@@ -1,25 +1,28 @@
-import Taro, {
+import {
   request as taroRequest,
   showToast,
+  setStorageSync,
   getStorageSync,
-  addInterceptor,
-  navigateTo,
 } from "@tarojs/taro";
-import { StorageKeyEnum } from "@/enums";
 import TaroTypes from "@tarojs/taro/types";
 import _includes from "lodash/includes";
+import { getTokenByCode } from "@/services/user";
+import { wxLogin } from "@/utils/authorize";
 
 type RequestOption = Omit<TaroTypes.request.Option, "url">;
 
-// const API_ORIGIN = "https://apollo.jasoncui.online";
-const API_ORIGIN = "https://apollo.jasoncui.online";
+// const API_ORIGIN = 'https://yada.jasoncui.online';
 
-// const API_ORIGIN = "http://192.168.110.240:8113";
+// const API_ORIGIN = 'https://bdxz.bettapharma.com';
+const API_ORIGIN = "http://123.57.108.243:8060";
 
-export const TOKEN_KEY = StorageKeyEnum.TOKEN_KEY;
+// const API_ORIGIN = 'http://192.168.0.12:8106';
+
+const TOKEN_KEY = "token";
+
+const LOGIN_TIME_LIMIT = 2;
 
 const NO_LOGIN_CODE = "0001007";
-let NO_LOGIN = false;
 
 const codeMessage = {
   200: "服务器成功返回请求的数据。",
@@ -51,9 +54,42 @@ const defaultOption: RequestOption = {
 
 const generateAccessTokenPromise = async () => {
   const token = getStorageSync(TOKEN_KEY);
+  if (token === "") {
+    const code = await wxLogin();
+    // 这里要防止死循环 getTokenByCode使用了request2 通过NO_TOKEN标志
+
+    const data: any = await getTokenByCode(code);
+
+    const newToken = data.data.token;
+    setStorageSync(TOKEN_KEY, newToken);
+    return newToken;
+  }
 
   return token;
 };
+
+const getAccessTokenObject = (() => {
+  let resetToken = () => {};
+  let generateReset = () => {
+    let isUsed = false;
+    return () => {
+      if (!isUsed) {
+        isUsed = true;
+        setStorageSync(TOKEN_KEY, "");
+        accessTokenPromise = generateAccessTokenPromise();
+        resetToken = generateReset();
+      }
+    };
+  };
+
+  let accessTokenPromise = generateAccessTokenPromise();
+  resetToken = generateReset();
+
+  return () => ({
+    accessTokenPromise,
+    resetToken,
+  });
+})();
 
 const interceptorResponse = async <T = any>(
   response: TaroTypes.request.SuccessCallbackResult<any>
@@ -63,7 +99,9 @@ const interceptorResponse = async <T = any>(
   if (statusCode !== 200) {
     throw new Error(codeMessage[statusCode] || "网络异常");
   } else {
-    const { success, retMsg, retCode } = data || {};
+    const { code, msg, retCode } = data || {};
+    const success = code === 200;
+    const retMsg = msg;
     if (data && !success) {
       if (retCode === NO_LOGIN_CODE) {
         throw { type: "NO_LOGIN", message: retMsg };
@@ -73,65 +111,51 @@ const interceptorResponse = async <T = any>(
   }
   return data;
 };
-const interceptorRequest = (chain) => {
-  const requestParams = chain.requestParams;
-
-  if (NO_LOGIN) {
-    // 1.放弃此次请求
-    const p = chain.proceed(requestParams);
-    p.abort();
-    return p;
-    // 2.请求终止后会进入catch
-    // 3. catch 里处理 abort 发起重登录
-    // 4. 写得这么别扭是因为taro目前还不支持异步的Request拦截器
-  }
-  return chain.proceed(requestParams);
-};
 
 const request = async <T = any>(path: string, option?: RequestOption) => {
   const finalOption = { ...defaultOption, ...option };
   const NO_TOKEN = finalOption["NO_TOKEN"];
 
-  try {
-    const ACCESS_TOKEN = NO_TOKEN
-      ? undefined
-      : await generateAccessTokenPromise();
-    const response = await taroRequest({
-      url: `${API_ORIGIN}${path}`,
-      ...finalOption,
-      header: { Authorization: ACCESS_TOKEN, ...finalOption.header },
-    });
-    const data = await interceptorResponse<T>(response);
-    return data;
-  } catch (err) {
-    // 收到没有登录的消息跳到登录页
-    const { type, message } = err;
-    console.log("message", message);
+  for (let loginTimes = 0; loginTimes < LOGIN_TIME_LIMIT; loginTimes++) {
+    const { accessTokenPromise, resetToken } = getAccessTokenObject();
+    try {
+      const ACCESS_TOKEN = NO_TOKEN ? undefined : await accessTokenPromise;
 
-    if (type !== "NO_LOGIN") {
-      showToast({
-        title: message,
-        icon: "none",
-        duration: 3500,
-      });
-      throw err;
-    } else if (type === "NO_LOGIN") {
-      if (NO_LOGIN === false) {
-        NO_LOGIN = true;
-        navigateTo({ url: "/pages/users/login/index" });
-        // 重置no_login
-        setTimeout(() => {
-          NO_LOGIN = false;
-        }, 1500);
+      const header = {
+        // 微信小程序，会把值为undefined的参数处理成  Authorization: [Object undefined]
+        // 而不是web端的去掉这个参数。
+        Authorization: ACCESS_TOKEN,
+        ...finalOption.header,
+      };
+      if (!ACCESS_TOKEN) {
+        delete header.Authorization;
       }
 
-      //
-      throw err;
+      const response = await taroRequest({
+        url: `${API_ORIGIN}${path}`,
+        ...finalOption,
+        header,
+      });
+
+      const data = await interceptorResponse<T>(response);
+
+      return data;
+    } catch (err) {
+      // 收到没有登录的消息才需要重试
+      const { type, message } = err;
+
+      if (type !== "NO_LOGIN" || loginTimes === LOGIN_TIME_LIMIT - 1) {
+        showToast({
+          title: message,
+          icon: "none",
+          duration: 3500,
+        });
+
+        throw err;
+      }
+      resetToken();
     }
   }
 };
-addInterceptor(Taro.interceptors.logInterceptor);
-addInterceptor(Taro.interceptors.timeoutInterceptor);
-addInterceptor(interceptorRequest);
 
 export default request;

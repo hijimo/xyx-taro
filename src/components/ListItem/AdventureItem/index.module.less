@@ -1,0 +1,76 @@
+@import url(~@/utils/utils.less);
+.adventureItem {
+  background: #fff;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  .status {
+    padding: 16px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(270deg, #ff4730 0%, #ff0000 100%);
+    border-radius: 0px 36px 36px 0px;
+    position: absolute;
+    left: 0;
+    top: 220px;
+    z-index: 9;
+    &.disabled {
+      background: linear-gradient(270deg, #000000 0%, #262626 100%);
+
+      opacity: 0.6;
+    }
+  }
+  .img {
+    height: 320px;
+  }
+  .info {
+    padding: 40px;
+    color: #211709;
+    .title {
+      font-size: 40px;
+      font-weight: 600;
+    }
+    .text {
+      font-size: 32px;
+      font-weight: 400;
+      margin-top: 12px;
+      height: 88px;
+      .textOverflowMulti2(2);
+    }
+    .progress {
+      margin: 40px 0 50px 0;
+      display: flex;
+      align-items: center;
+      .progressBar {
+        height: 20px;
+        background: #f7f7f7;
+        border-radius: 12px;
+        .progressCurrent {
+          height: 100%;
+          background: linear-gradient(270deg, #ffa135 0%, #ff6818 100%);
+          border-radius: 12px;
+        }
+      }
+      .progressText {
+        flex: none;
+        margin-left: 40px;
+        font-size: 24px;
+        color: #8a8a8a;
+      }
+    }
+    .button {
+      height: 100px;
+      background: linear-gradient(270deg, #ff972d 0%, #ff5e14 100%);
+      box-shadow: 0px 20px 50px 0px rgba(255, 102, 24, 0.3);
+      border-radius: 50px;
+      text-align: center;
+      line-height: 100px;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+      width: 100%;
+    }
+  }
+}
