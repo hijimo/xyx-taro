@@ -5,6 +5,8 @@ export default defineAppConfig({
     "pages/adventure/detail/index",
     "pages/adventure/go/index",
     "pages/chapter/index",
+    "pages/chapter/result/index",
+    "pages/reward/index",
   ],
   window: {
     backgroundTextStyle: "light",

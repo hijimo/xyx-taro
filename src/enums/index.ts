@@ -5,3 +5,4 @@ export * from "./storage";
 export * from "./device";
 export * from "./file";
 export * from "./strategy";
+export * from "./chapter";

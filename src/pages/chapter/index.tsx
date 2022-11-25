@@ -1,4 +1,10 @@
-import React, { useRef, useCallback, useState, useMemo } from "react";
+import React, {
+  useRef,
+  useCallback,
+  useState,
+  useMemo,
+  useEffect,
+} from "react";
 import { View, Button } from "@tarojs/components";
 import {
   navigateTo,
@@ -10,6 +16,7 @@ import {
 import nzh from "nzh/dist/nzh.cn";
 import classNames from "classnames";
 import _get from "lodash/get";
+import _fromPairs from "lodash/fromPairs";
 import { useQuery, useMutation } from "react-query";
 import Form from "rc-field-form";
 import { getGameInfo, validGame } from "@/services/game";
@@ -18,7 +25,6 @@ import Introduction from "./components/Introduction";
 import QuestionList from "./components/QuestionList";
 
 import styles from "./index.module.less";
-import { keys } from "lodash";
 
 interface IndexProps {}
 
@@ -58,11 +64,25 @@ const Index: React.FC<IndexProps> = () => {
   const title = useMemo(() => {
     return `第${nzh.encodeS(index + 1)}章`;
   }, [index]);
+  useEffect(() => {
+    const historyValues = _fromPairs(
+      chapter?.questions.map((it) => {
+        return [
+          `${it.gameQuestionId}_${it.questionId}`,
+          it?.answer?.split(",")?.map((i) => parseInt(i, 10)) || undefined,
+        ];
+      })
+    );
+    if (form && chapter) {
+      form.setFieldsValue(historyValues);
+    }
+  }, [chapter, form]);
 
   const isSubmit =
     data?.gameChapter?.length && index >= data?.gameChapter?.length - 1;
 
   const handleFinish = (values) => {
+    debugger;
     const getSelectOptions = () => {
       return (
         Object.keys(values).map((key) => {

@@ -29,6 +29,18 @@
           "pathName": "pages/chapter/index",
           "query": "gameId=3",
           "scene": null
+        },
+        {
+          "name": "pages/chapter/result/index",
+          "pathName": "pages/chapter/result/index",
+          "query": "gameId=3",
+          "scene": null
+        },
+        {
+          "name": "pages/reward/index",
+          "pathName": "pages/reward/index",
+          "query": "gameId=3",
+          "scene": null
         }
       ]
     }
