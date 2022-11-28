@@ -27,6 +27,12 @@ const Index: React.FC<IndexProps> = () => {
     }
   );
 
+  const handleRouteAdventure = useCallback(() => {
+    navigateTo({
+      url: `/pages/adventure/go/index?strategyId=${strategyId}`,
+    });
+  }, []);
+
   return (
     <View className={styles.index}>
       <Info data={data} />
@@ -37,6 +43,7 @@ const Index: React.FC<IndexProps> = () => {
       <Button
         disabled={data?.strategyStatus === BooleanEnum.TRUE}
         className={styles.button}
+        onClick={handleRouteAdventure}
       >
         神秘之旅
       </Button>

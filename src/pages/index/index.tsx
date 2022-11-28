@@ -37,9 +37,9 @@ const Index: React.FC<IndexProps> = () => {
     }
   );
 
-  const handleRouteAdventure = useCallback((deviceItem: DeviceItemSSD) => {
+  const handleRouteAdventure = useCallback((it) => {
     navigateTo({
-      url: `/pages/device/detail/index?id=${deviceItem.id}`,
+      url: `/pages/adventure/detail/index?strategyId=${it.strategyId}`,
     });
   }, []);
 

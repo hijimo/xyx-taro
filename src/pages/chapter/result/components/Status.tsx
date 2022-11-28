@@ -9,10 +9,11 @@ import styles from "./Status.module.less";
 
 interface StatusProps {
   data?: ChapterSSD;
+  onClick?: () => void;
   className?: string;
 }
 
-const Status: FC<StatusProps> = ({ data, className }) => {
+const Status: FC<StatusProps> = ({ data, className, onClick }) => {
   const isSuccess = useMemo(() => {
     const total = 100 * data?.gameChapter.length;
 
@@ -23,7 +24,7 @@ const Status: FC<StatusProps> = ({ data, className }) => {
   }, [data]);
 
   return (
-    <View className={classNames(styles.status, className)}>
+    <View className={classNames(styles.status, className)} onClick={onClick}>
       <Image src={isSuccess ? s1 : s2} className={styles.img} />
     </View>
   );

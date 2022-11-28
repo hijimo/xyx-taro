@@ -7,6 +7,7 @@ export default defineAppConfig({
     "pages/chapter/index",
     "pages/chapter/result/index",
     "pages/reward/index",
+    "pages/reward/final/index",
   ],
   window: {
     backgroundTextStyle: "light",

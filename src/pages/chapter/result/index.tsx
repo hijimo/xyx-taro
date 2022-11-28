@@ -42,11 +42,21 @@ const Index: React.FC<IndexProps> = () => {
     }
   );
 
+  const handleRouteReward = () => {
+    navigateTo({
+      url: `/pages/reward/index?gameId=${gameId}`,
+    });
+  };
+
   return (
     <View className={styles.index}>
       <View className={styles.title}>{data?.strategyName || " "}</View>
       <ProgressCard className={styles.progress} data={data} />
-      <Status data={data} className={styles.status} />
+      <Status
+        data={data}
+        className={styles.status}
+        onClick={handleRouteReward}
+      />
     </View>
   );
 };

@@ -1,48 +1,54 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/adventure/detail/index",
-          "pathName": "pages/adventure/detail/index",
-          "query": "strategyId=6",
-          "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "name": "pages/adventure/go/index",
-          "pathName": "pages/adventure/go/index",
-          "query": "strategyId=6",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "name": "pages/chapter/index",
-          "pathName": "pages/chapter/index",
-          "query": "gameId=3",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "pages/chapter/result/index",
-          "pathName": "pages/chapter/result/index",
-          "query": "gameId=3",
-          "scene": null
-        },
-        {
-          "name": "pages/reward/index",
-          "pathName": "pages/reward/index",
-          "query": "gameId=3",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/adventure/detail/index",
+                    "pathName": "pages/adventure/detail/index",
+                    "query": "strategyId=6",
+                    "scene": null
+                },
+                {
+                    "name": "pages/adventure/go/index",
+                    "pathName": "pages/adventure/go/index",
+                    "query": "strategyId=6",
+                    "scene": null
+                },
+                {
+                    "name": "pages/chapter/index",
+                    "pathName": "pages/chapter/index",
+                    "query": "gameId=3",
+                    "scene": null
+                },
+                {
+                    "name": "pages/chapter/result/index",
+                    "pathName": "pages/chapter/result/index",
+                    "query": "gameId=3",
+                    "scene": null
+                },
+                {
+                    "name": "pages/reward/index",
+                    "pathName": "pages/reward/index",
+                    "query": "gameId=3",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/reward/final/index",
+                    "query": "gameId=3",
+                    "scene": null
+                }
+            ]
         }
-      ]
     }
-  }
 }

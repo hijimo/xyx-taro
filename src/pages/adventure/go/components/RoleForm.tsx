@@ -1,7 +1,7 @@
 // 店铺信息
 import React, { useState, useCallback } from "react";
 import { View, Input, Form as AtForm, Image, Button } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import { navigateTo, showToast } from "@tarojs/taro";
 import classNames from "classnames";
 import Form from "rc-field-form";
 import { FormProps } from "rc-field-form/es/Form";
@@ -42,10 +42,13 @@ const RoleForm: React.FC<RoleFormProps> = ({
   const { mutate, isLoading } = useMutation(
     (phoneNumber: string) => createGame(phoneNumber),
     {
-      onSuccess: () => {
-        Taro.showToast({
+      onSuccess: (r) => {
+        showToast({
           icon: "none",
           title: "添加成功",
+        });
+        navigateTo({
+          url: `/pages/chapter/index?gameId=${r?.data.gameId}`,
         });
       },
     }

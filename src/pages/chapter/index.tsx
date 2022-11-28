@@ -47,11 +47,18 @@ const Index: React.FC<IndexProps> = () => {
       },
     }
   );
+  const isSubmit =
+    data?.gameChapter?.length && index >= data?.gameChapter?.length - 1;
   const { mutate, isLoading } = useMutation(
     (values: any) => validGame(values),
     {
       onSuccess: () => {
         setIndex((i) => i + 1);
+        if (isSubmit) {
+          navigateTo({
+            url: `/pages/chapter/result/index?gameId=${gameId}`,
+          });
+        }
       },
     }
   );
@@ -78,11 +85,7 @@ const Index: React.FC<IndexProps> = () => {
     }
   }, [chapter, form]);
 
-  const isSubmit =
-    data?.gameChapter?.length && index >= data?.gameChapter?.length - 1;
-
   const handleFinish = (values) => {
-    debugger;
     const getSelectOptions = () => {
       return (
         Object.keys(values).map((key) => {
