@@ -103,7 +103,7 @@ const interceptorResponse = async <T = any>(
     const success = code === 200;
     const retMsg = msg;
     if (data && !success) {
-      if (retCode === NO_LOGIN_CODE) {
+      if (code === 401) {
         throw { type: "NO_LOGIN", message: retMsg };
       }
       throw { message: retMsg };
@@ -142,6 +142,7 @@ const request = async <T = any>(path: string, option?: RequestOption) => {
       return data;
     } catch (err) {
       // 收到没有登录的消息才需要重试
+
       const { type, message } = err;
 
       if (type !== "NO_LOGIN" || loginTimes === LOGIN_TIME_LIMIT - 1) {
