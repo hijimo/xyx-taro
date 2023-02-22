@@ -27,19 +27,22 @@ const UserInfo: React.FC<UserInfoProps> = () => {
   const userInfo: UserSSD = useSelector(selectUserInfoOfUser);
 
   const handleClick = useCallback(async () => {
-    if (!userInfo.avatar) {
-      const user = await getUserInfo();
-      Promise.all([dispatch(asyncUpdateUserInfo(user))]);
-    }
-
+    // if (!userInfo.avatar) {
+    // const user = await getUserInfo();
+    // Promise.all([dispatch(asyncUpdateUserInfo(user))]);
+    // }
     //
   }, [userInfo]);
 
   return (
     <View className={styles.userInfo} onClick={handleClick}>
-      <Avatar src={userInfo.avatar || defaultAvatar} />
+      {/* <Avatar src={userInfo?.avatar || defaultAvatar} />
       <H size="h1" className={styles.h1}>
-        {userInfo.nickName || "点击登录"}
+        {userInfo?.nickName || "点击登录"}
+      </H> */}
+      <Avatar src={defaultAvatar} />
+      <H size="h1" className={styles.h1}>
+        微信用户
       </H>
     </View>
   );
